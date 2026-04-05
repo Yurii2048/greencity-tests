@@ -1,10 +1,13 @@
-# GreenCity Tests
+# GreenCity Automation Tests
 
 ## Description
-This repository contains test cases for the GreenCity events page.
+UI automated tests for GreenCity events page using Python and Selenium.
 
-## Tested page
+## Test Page
 https://www.greencity.cx.ua/#/greenCity/events
+
+## Run tests
+python -m unittest discover tests
 
 ## Author
 Yurii Lesiuk
