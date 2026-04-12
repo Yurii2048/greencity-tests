@@ -7,6 +7,12 @@ class AuthModal:
     PASSWORD_INPUT = (By.ID, "password")
     REPEAT_PASSWORD_INPUT = (By.ID, "repeatPassword")
     SUBMIT_BUTTON = (By.XPATH, "//button[@class='greenStyle']")
+    # SUBMIT_BUTTON = (By.CSS_SELECTOR, ".form-content-container > button")
+
+    EMAIL_ERROR = (By.ID, "email-err-msg")
+    USERNAME_ERROR = (By.ID, "firstname-err-msg")
+    PASSWORD_ERROR = (By.ID, "password-err-msg")
+    CONFIRM_PASSWORD_ERROR = (By.ID, "confirm-err-msg")
 
     def __init__(self, page):
         self.page = page
@@ -37,3 +43,18 @@ class AuthModal:
         self.enter_password(password)
         self.enter_repeat_password(password)
         self.submit()
+
+        def get_email_error(self):
+            return self.page.find(self.EMAIL_ERROR).text
+
+        def get_username_error(self):
+            return self.page.find(self.USERNAME_ERROR).text
+
+        def get_password_error(self):
+            return self.page.find(self.PASSWORD_ERROR).text
+
+        def get_confirm_password_error(self):
+            return self.page.find(self.CONFIRM_PASSWORD_ERROR).text
+
+        def is_submit_disabled(self):
+            return self.page.is_disabled(self.SUBMIT_BUTTON)

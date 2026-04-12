@@ -37,3 +37,6 @@ class BasePage:
 
     def wait_for_url_contains(self, text):
         self.wait.until(expected_conditions.url_contains(text))
+
+    def is_disabled(self, locator):
+        return not self.find(locator).is_enabled()

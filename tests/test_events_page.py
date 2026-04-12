@@ -50,6 +50,49 @@ class TestEventsPage(unittest.TestCase):
         self.page.wait_for_url_contains("/events/create-update-event")
         self.assertIn("/events/create-update-event", self.driver.current_url)
 
+    def test_registration_with_invalid_data(self):
+        test_data = [
+            {
+                "email": "example.gmail.com",
+                "username": "123",
+                "password": "123"
+            },
+            {
+                "email": "wrong@",
+                "username": "1",
+                "password": "qwe"
+            }
+        ]
+
+        for data in test_data:
+            with self.subTest(data=data):
+                self.page.register(data["email"], data["username"], data["password"])
+
+                self.assertTrue(
+                    self.page.auth_modal.is_submit_disabled(),
+                    "Submit button should be disabled"
+                )
+
+                self.assertNotEqual(
+                    self.page.auth_modal.get_email_error(), "",
+                    "Email error should be displayed"
+                )
+
+                self.assertNotEqual(
+                    self.page.auth_modal.get_username_error(), "",
+                    "Username error should be displayed"
+                )
+
+                self.assertNotEqual(
+                    self.page.auth_modal.get_password_error(), "",
+                    "Password error should be displayed"
+                )
+
+                self.assertNotEqual(
+                    self.page.auth_modal.get_confirm_password_error(), "",
+                    "Confirm password error should be displayed"
+                )
+
 
 if __name__ == "__main__":
     unittest.main()
