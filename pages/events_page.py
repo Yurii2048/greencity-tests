@@ -21,9 +21,14 @@ class EventsPage(BasePage):
         self.header.open_sign_in()
         self.auth_modal.sign_in(email, password)
 
-    def register(self, email, password, username):
+    def register(self, email, username, password):
         self.header.open_sign_up()
-        self.auth_modal.sign_up(email, password, username)
+        self.auth_modal.sign_up(email, username, password)
+        self.auth_modal.submit()
+
+    def registration_with_invalid_data(self, email, username, password, repeat_password):
+        self.header.open_sign_up()
+        self.auth_modal.sign_up(email, username, password, repeat_password)
 
     def go_to_events(self):
         self.header.go_to_events()
